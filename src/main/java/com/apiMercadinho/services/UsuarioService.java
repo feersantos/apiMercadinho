@@ -38,6 +38,7 @@ public class UsuarioService {
         this.repositorio.save(usuario); //salvar as alterações do usuário
     }
 
+
     //retorna a lista de usuário
     public List<Usuario> getAllUsuarios() {
        return this.repositorio.findAll();

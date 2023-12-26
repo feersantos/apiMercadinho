@@ -20,6 +20,7 @@ public class TransacaoService {
     private UsuarioService usuarioService;
 
     @Autowired
+
     private TransacaoService repositorio;
 
     @Autowired
@@ -37,7 +38,7 @@ public class TransacaoService {
         usuarioService.validaTransacao(usuario, transacao.valor());
 
         boolean autorizada = this.autorizaTransacao(usuario, transacao.valor());
-        if(!autorizada){//se não estiver autorizado
+        if (!autorizada) {//se não estiver autorizado
             throw new Exception("Transação não autorizada!");
         }
 
@@ -53,7 +54,6 @@ public class TransacaoService {
         lojista.setSaldo(lojista.getSaldo().add(transacao.valor()));
 
         //salvar a transação feita
-        repositorio.salva(novaTransacao);
         usuarioService.salvaUsuario(usuario);
         usuarioService.salvaUsuario(lojista);
 
@@ -64,23 +64,18 @@ public class TransacaoService {
         return novaTransacao;
     }
 
-    public void salva(Transacao usuario){
-        this.repositorio.salva(usuario); //salvar as alterações do usuário
-    }
 
-
-    public boolean autorizaTransacao(Usuario cliente, BigDecimal valor){
-        //criar um "mapa" para representar a transaçao autorizada
+    public boolean autorizaTransacao(Usuario cliente, BigDecimal valor) {
+        //criar um mapa" para representar a transaçao autorizada
         Map<String, Object> respostaAutorizada = new HashMap<>();
         respostaAutorizada.put("mensagem", "Autorizado");
 
-       //resposta do http autorizado
+        //resposta do http autorizado
         ResponseEntity<Map<String, Object>> responseEntity = new ResponseEntity<>(respostaAutorizada, HttpStatus.OK);
 
         // Validar a resposta, se der ok vai comparar a mensagem
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
             Map<String, Object> responseBody = responseEntity.getBody();
-            //assert responseBody != null;
             String mensagem = (String) responseBody.get("mensagem");
             return "Autorizado".equalsIgnoreCase(mensagem); //faz a comparação da string com o que tem na mensagem
         } else {
@@ -88,3 +83,4 @@ public class TransacaoService {
         }
     }
 }
+
