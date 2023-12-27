@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,7 +48,6 @@ public class TransacaoService {
         novaTransacao.setConta(transacao.valor());
         novaTransacao.setCliente(usuario);
         novaTransacao.setLojista(lojista);
-        novaTransacao.setHoraTransacao(LocalDateTime.now());
 
         //atualizar os saldos
         usuario.setSaldo(usuario.getSaldo().subtract(transacao.valor()));

@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity(name = "transacoes") //entidade
 @Table(name = "transacoes") //tabela do banco
@@ -29,7 +30,5 @@ public class Transacao {
     @ManyToOne
     @JoinColumn(name = "lojista_id")
     private Usuario lojista;
-
-    private LocalDateTime horaTransacao;
 
 }
