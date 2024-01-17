@@ -19,7 +19,7 @@ public class UsuarioService {
         if (usuario.getTipoUsuario() == TipoUsuario.LOJISTA) { //validacao para verificar se é LOJISTA
             throw new Exception("Lojistas NÃO podem realizar transações!");
         }
-        if (usuario.getSaldo().compareTo(conta) < 0) { //verifica se o valor do balance for menor que conta
+        if (usuario.getSaldo().compareTo(conta) < 0) { //verifica se o saldo é menor que valor que possui na conta
             throw new Exception("Saldo insuficiente.");
         }
     }
